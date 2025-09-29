@@ -1,37 +1,50 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Calendar, Phone, Shield, CircleCheck as CheckCircle, Upload, FileText, Video, User } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Progress } from '../components/ui/progress';
-import { useToast } from '../hooks/use-toast';
-import { useAppSelector, useAppDispatch } from '../hooks';
-import { loginSuccess } from '../store/slices/authSlice';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  Phone,
+  Shield,
+  CircleCheck as CheckCircle,
+  User,
+} from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Progress } from "../components/ui/progress";
+import { useToast } from "../hooks/use-toast";
+import { useAppSelector, useAppDispatch } from "../hooks";
+import { loginSuccess } from "../store/slices/authSlice";
 
 export const CompleteProfile = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const dispatch = useAppDispatch();
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
-  
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
-    dateOfBirth: '',
-    phone: '',
-    otp: '',
+    dateOfBirth: "",
+    phone: "",
+    otp: "",
     phoneVerified: false,
     identityVerified: false,
     addressVerified: false,
     bankVerified: false,
     videoRecorded: false,
-    idUploaded: false
+    idUploaded: false,
   });
 
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const calculateAge = (dateOfBirth: string) => {
@@ -39,11 +52,14 @@ export const CompleteProfile = () => {
     const birthDate = new Date(dateOfBirth);
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
-    
+
     return age;
   };
 
@@ -79,7 +95,7 @@ export const CompleteProfile = () => {
       });
       return;
     }
-    
+
     toast({
       title: "OTP Sent",
       description: "Verification code sent to your phone number.",
@@ -96,8 +112,8 @@ export const CompleteProfile = () => {
       });
       return;
     }
-    
-    setFormData(prev => ({ ...prev, phoneVerified: true }));
+
+    setFormData((prev) => ({ ...prev, phoneVerified: true }));
     toast({
       title: "Phone Verified",
       description: "Your phone number has been verified successfully.",
@@ -107,18 +123,20 @@ export const CompleteProfile = () => {
 
   const handleCompleteProfile = () => {
     if (user) {
-      dispatch(loginSuccess({
-        ...user,
-        role: 'host'
-      }));
+      dispatch(
+        loginSuccess({
+          ...user,
+          role: "host",
+        })
+      );
     }
 
     toast({
       title: "Profile Completed",
       description: "Welcome to RentHub! You can now start hosting items.",
     });
-    
-    navigate('/host/dashboard');
+
+    navigate("/host/dashboard");
   };
 
   const getStepProgress = () => {
@@ -142,15 +160,11 @@ export const CompleteProfile = () => {
   return (
     <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <Button
-          variant="ghost"
-          onClick={() => navigate(-1)}
-          className="mb-4"
-        >
+        <Button variant="ghost" onClick={() => navigate(-1)} className="mb-4">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
-        
+
         <h1 className="text-3xl font-bold mb-2">Complete Your Host Profile</h1>
         <p className="text-muted-foreground">
           Complete these steps to start hosting on RentHub
@@ -161,7 +175,9 @@ export const CompleteProfile = () => {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium">Progress</span>
-          <span className="text-sm text-muted-foreground">{Math.round(getStepProgress())}%</span>
+          <span className="text-sm text-muted-foreground">
+            {Math.round(getStepProgress())}%
+          </span>
         </div>
         <Progress value={getStepProgress()} className="w-full" />
       </div>
@@ -185,8 +201,10 @@ export const CompleteProfile = () => {
                 id="dateOfBirth"
                 type="date"
                 value={formData.dateOfBirth}
-                onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                max={new Date().toISOString().split('T')[0]}
+                onChange={(e) =>
+                  handleInputChange("dateOfBirth", e.target.value)
+                }
+                max={new Date().toISOString().split("T")[0]}
               />
             </div>
             <Button onClick={handleDateOfBirthNext} className="w-full">
@@ -216,7 +234,7 @@ export const CompleteProfile = () => {
                 id="phone"
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => handleInputChange('phone', e.target.value)}
+                onChange={(e) => handleInputChange("phone", e.target.value)}
                 placeholder="Enter your phone number"
               />
             </div>
@@ -246,7 +264,7 @@ export const CompleteProfile = () => {
               <Input
                 id="otp"
                 value={formData.otp}
-                onChange={(e) => handleInputChange('otp', e.target.value)}
+                onChange={(e) => handleInputChange("otp", e.target.value)}
                 placeholder="Enter 6-digit code"
                 maxLength={6}
               />
@@ -276,9 +294,11 @@ export const CompleteProfile = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
-                Your basic profile is now complete. You can start hosting immediately, or complete additional verification steps to increase trust with renters.
+                Your basic profile is now complete. You can start hosting
+                immediately, or complete additional verification steps to
+                increase trust with renters.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 border rounded-lg">
                   <div className="flex items-center justify-between mb-2">
@@ -289,7 +309,7 @@ export const CompleteProfile = () => {
                     Your phone number has been verified
                   </p>
                 </div>
-                
+
                 <div className="p-4 border rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium">Identity Verification</h4>
@@ -305,7 +325,11 @@ export const CompleteProfile = () => {
                 <Button onClick={handleCompleteProfile} className="flex-1">
                   Start Hosting Now
                 </Button>
-                <Button variant="outline" onClick={() => navigate('/host/kyc')} className="flex-1">
+                <Button
+                  variant="outline"
+                  onClick={() => navigate("/host/kyc")}
+                  className="flex-1"
+                >
                   Complete Full Verification
                 </Button>
               </div>
