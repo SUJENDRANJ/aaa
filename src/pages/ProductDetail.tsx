@@ -152,7 +152,7 @@ export const ProductDetail = () => {
   return (
     <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Back Button */}
-      <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
+      <Button variant="secondary" onClick={() => navigate(-1)} className="mb-6">
         <ArrowLeft className="h-4 w-4 mr-2" />
         Back
       </Button>

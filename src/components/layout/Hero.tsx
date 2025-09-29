@@ -1,23 +1,23 @@
-import { ArrowRight, Play, Star } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { useAppSelector } from '../../hooks';
+import { ArrowRight, Play, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { useAppSelector } from "../../hooks";
 
 export const Hero = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 
   const handleStartBrowsing = () => {
-    if (isAuthenticated && user?.role === 'host') {
-      navigate('/host/dashboard');
+    if (isAuthenticated && user?.role === "host") {
+      navigate("/host/dashboard");
     } else {
-      navigate('/products');
+      navigate("/products");
     }
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-black dark:via-black dark:to-black">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -27,14 +27,15 @@ export const Hero = () => {
                 🎉 New Platform Launch
               </Badge>
               <h1 className="text-4xl lg:text-6xl font-bold tracking-tight">
-                Rent Anything,{' '}
+                Rent Anything,{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Anytime
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-lg">
-                Discover thousands of items available for rent in your area. From electronics to tools, 
-                find what you need without the commitment of buying.
+                Discover thousands of items available for rent in your area.
+                From electronics to tools, find what you need without the
+                commitment of buying.
               </p>
             </div>
 
@@ -52,18 +53,24 @@ export const Hero = () => {
             <div className="flex items-center space-x-8 pt-8">
               <div className="text-center">
                 <div className="text-2xl font-bold">10K+</div>
-                <div className="text-sm text-muted-foreground">Items Available</div>
+                <div className="text-sm text-muted-foreground">
+                  Items Available
+                </div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold">5K+</div>
-                <div className="text-sm text-muted-foreground">Happy Renters</div>
+                <div className="text-sm text-muted-foreground">
+                  Happy Renters
+                </div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center space-x-1">
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   <span className="text-2xl font-bold">4.9</span>
                 </div>
-                <div className="text-sm text-muted-foreground">Average Rating</div>
+                <div className="text-sm text-muted-foreground">
+                  Average Rating
+                </div>
               </div>
             </div>
           </div>
@@ -77,9 +84,9 @@ export const Hero = () => {
                 className="rounded-2xl shadow-2xl"
               />
             </div>
-            
+
             {/* Floating Cards */}
-            <div className="absolute -top-4 -left-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border">
+            <div className="absolute -top-4 -left-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border z-10">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
                   📷
@@ -90,8 +97,8 @@ export const Hero = () => {
                 </div>
               </div>
             </div>
-            
-            <div className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border">
+
+            <div className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border z-10">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
                   🎮
@@ -105,7 +112,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Background Decoration */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl" />

@@ -1,11 +1,11 @@
-import { Star, Heart } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useToast } from '@/hooks/use-toast';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import { toggleFavorite } from '@/store/slices/productsSlice';
-import { Product } from '../../types/product';
+import { Star, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { toggleFavorite } from "@/store/slices/productsSlice";
+import { Product } from "../../types/product";
 
 interface ProductCardProps {
   product: Product;
@@ -16,13 +16,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const { toast } = useToast();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   const { favorites } = useAppSelector((state) => state.products);
-  
+
   const isFavorited = favorites.includes(product.id);
 
   const handleFavoriteToggle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (!isAuthenticated) {
       toast({
         title: "Login Required",
@@ -31,12 +31,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       });
       return;
     }
-    
+
     dispatch(toggleFavorite(product.id));
     toast({
       title: isFavorited ? "Removed from favorites" : "Added to favorites",
-      description: isFavorited 
-        ? "Item removed from your favorites list" 
+      description: isFavorited
+        ? "Item removed from your favorites list"
         : "Item added to your favorites list",
     });
   };
@@ -48,9 +48,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
-        stars.push(<Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />);
+        stars.push(
+          <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+        );
       } else if (i === fullStars && hasHalfStar) {
-        stars.push(<Star key={i} className="h-4 w-4 fill-yellow-400/50 text-yellow-400" />);
+        stars.push(
+          <Star
+            key={i}
+            className="h-4 w-4 fill-yellow-400/50 text-yellow-400"
+          />
+        );
       } else {
         stars.push(<Star key={i} className="h-4 w-4 text-gray-300" />);
       }
@@ -60,7 +67,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <Link to={`/product/${product.id}`} className="group relative bg-white dark:bg-gray-800 rounded-lg border shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden block">
+    <Link
+      to={`/product/${product.id}`}
+      className="group relative bg-white dark:bg-gray-800 rounded-lg border shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden block"
+    >
       {/* Sale Badge */}
       {product.originalPrice && (
         <Badge className="absolute top-2 left-2 z-10 bg-red-500 hover:bg-red-500">
@@ -75,7 +85,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         onClick={handleFavoriteToggle}
         className="absolute top-2 right-2 z-10 h-8 w-8 p-0 bg-white/80 hover:bg-white dark:bg-gray-800/80 dark:hover:bg-gray-800"
       >
-        <Heart className={`h-4 w-4 ${isFavorited ? 'fill-red-500 text-red-500' : ''}`} />
+        <Heart
+          className={`h-4 w-4 ${
+            isFavorited ? "fill-red-500 text-red-500" : ""
+          }`}
+        />
       </Button>
 
       {/* Product Image */}
@@ -121,9 +135,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
         {/* Stock Status */}
         <div className="flex items-center space-x-2">
-          <div className={`w-2 h-2 rounded-full ${product.inStock ? 'bg-green-500' : 'bg-red-500'}`} />
+          <div
+            className={`w-2 h-2 rounded-full ${
+              product.inStock ? "bg-green-500" : "bg-red-500"
+            }`}
+          />
           <span className="text-xs text-muted-foreground">
-            {product.inStock ? `Available` : 'Not available'}
+            {product.inStock ? `Available` : "Not available"}
           </span>
         </div>
 
@@ -138,7 +156,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               </span>
             )}
           </div>
-          <Button
+          {/* <Button
             size="sm"
             disabled={!product.inStock}
             className="h-8 px-3"
@@ -149,7 +167,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             }}
           >
             Rent
-          </Button>
+          </Button> */}
         </div>
       </div>
     </Link>

@@ -1,11 +1,11 @@
-import { ArrowRight, Star, Shield, Clock, Zap } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Card, CardContent } from '../ui/card';
+import { ArrowRight, Star, Shield, Clock, Zap } from "lucide-react";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { Card, CardContent } from "../ui/card";
 
 export const HomeBanners = () => {
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-black dark:via-black dark:to-black">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Feature Banner */}
         <div className="mb-16">
@@ -13,22 +13,30 @@ export const HomeBanners = () => {
             <CardContent className="p-0">
               <div className="grid lg:grid-cols-2 gap-0">
                 <div className="p-8 lg:p-12 text-white">
-                  <Badge variant="secondary" className="mb-4 bg-white/20 text-white border-0">
+                  <Badge
+                    variant="secondary"
+                    className="mb-4 bg-white/20 text-white border-0"
+                  >
                     🎉 Limited Time Offer
                   </Badge>
                   <h2 className="text-3xl lg:text-4xl font-bold mb-4">
                     Get 50% Off Your First Rental
                   </h2>
                   <p className="text-lg mb-6 text-blue-100">
-                    Join thousands of happy renters and discover premium items at unbeatable prices. 
-                    Perfect for trying before buying or occasional use.
+                    Join thousands of happy renters and discover premium items
+                    at unbeatable prices. Perfect for trying before buying or
+                    occasional use.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button size="lg" variant="secondary" className="group">
                       Start Renting Now
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
-                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-white text-white hover:bg-white hover:text-blue-600"
+                    >
                       Learn More
                     </Button>
                   </div>
@@ -100,28 +108,37 @@ export const HomeBanners = () => {
                 />
               </div>
               <div className="p-8 lg:p-12 text-white order-1 lg:order-2">
-                <Badge variant="secondary" className="mb-4 bg-white/20 text-white border-0">
+                <Badge
+                  variant="secondary"
+                  className="mb-4 bg-white/20 text-white border-0"
+                >
                   💰 Earn Extra Income
                 </Badge>
                 <h2 className="text-3xl lg:text-4xl font-bold mb-4">
                   Become a Host Today
                 </h2>
                 <p className="text-lg mb-6 text-green-100">
-                  Turn your unused items into income. Join our community of hosts 
-                  and start earning money from things you already own.
+                  Turn your unused items into income. Join our community of
+                  hosts and start earning money from things you already own.
                 </p>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="text-sm">Earn up to $500/month per item</span>
+                    <span className="text-sm">
+                      Earn up to $500/month per item
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="text-sm">Full insurance coverage included</span>
+                    <span className="text-sm">
+                      Full insurance coverage included
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="text-sm">Easy setup in under 10 minutes</span>
+                    <span className="text-sm">
+                      Easy setup in under 10 minutes
+                    </span>
                   </div>
                 </div>
                 <Button size="lg" variant="secondary" className="group">
