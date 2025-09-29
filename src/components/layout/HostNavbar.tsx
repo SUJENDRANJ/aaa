@@ -187,7 +187,7 @@ export const HostNavbar = ({
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="secondary" size="sm">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
@@ -241,7 +241,7 @@ export const HostNavbar = ({
             <RoleSwitcher />
 
             <Button
-              variant="ghost"
+              variant="secondary"
               size="sm"
               onClick={() => navigate("/products")}
             >
@@ -249,7 +249,7 @@ export const HostNavbar = ({
             </Button>
 
             <Link to="/notifications">
-              <Button variant="ghost" size="sm" className="relative">
+              <Button variant="secondary" size="sm" className="relative">
                 <Bell className="h-4 w-4" />
                 <Badge
                   variant="destructive"
@@ -264,7 +264,7 @@ export const HostNavbar = ({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
-                    variant="ghost"
+                    variant="secondary"
                     className="flex items-center space-x-2"
                   >
                     <img
@@ -292,7 +292,11 @@ export const HostNavbar = ({
             ) : (
               <Dialog open={isAccountOpen} onOpenChange={setIsAccountOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="ghost" size="sm" className="hidden sm:flex">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="hidden sm:flex"
+                  >
                     <User className="h-4 w-4 mr-2" />
                     Account
                   </Button>

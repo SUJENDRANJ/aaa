@@ -1,50 +1,54 @@
-import { useState } from 'react';
-import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
-import { Button } from './button';
-import { Input } from './input';
-import { Card, CardContent, CardHeader, CardTitle } from './card';
-import { ScrollArea } from './scroll-area';
+import { useState } from "react";
+import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { Button } from "./button";
+import { Input } from "./input";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
+import { ScrollArea } from "./scroll-area";
 
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'bot';
+  sender: "user" | "bot";
   timestamp: Date;
 }
 
 const predefinedResponses: Record<string, string> = {
-  'hello': 'Hello! How can I help you with RentHub today?',
-  'hi': 'Hi there! What can I assist you with?',
-  'help': 'I can help you with questions about renting items, becoming a host, payments, and general platform usage. What would you like to know?',
-  'rent': 'To rent an item, browse our products, select your dates, and complete the booking. You\'ll need to create an account first.',
-  'host': 'To become a host, complete your profile and KYC verification. Then you can start listing your items for rent.',
-  'payment': 'We accept credit cards, PayPal, and Apple Pay. All payments are secure and processed through encrypted channels.',
-  'cancel': 'You can cancel your booking up to 24 hours before the rental start date for a full refund.',
-  'support': 'For additional support, you can contact our team at support@renthub.com or call 1-800-RENTHUB.',
-  'default': 'I\'m here to help! You can ask me about renting items, becoming a host, payments, cancellations, or general platform questions.'
+  hello: "Hello! How can I help you with RentHub today?",
+  hi: "Hi there! What can I assist you with?",
+  help: "I can help you with questions about renting items, becoming a host, payments, and general platform usage. What would you like to know?",
+  rent: "To rent an item, browse our products, select your dates, and complete the booking. You'll need to create an account first.",
+  host: "To become a host, complete your profile and KYC verification. Then you can start listing your items for rent.",
+  payment:
+    "We accept credit cards, PayPal, and Apple Pay. All payments are secure and processed through encrypted channels.",
+  cancel:
+    "You can cancel your booking up to 24 hours before the rental start date for a full refund.",
+  support:
+    "For additional support, you can contact our team at support@renthub.com or call 1-800-RENTHUB.",
+  default:
+    "I'm here to help! You can ask me about renting items, becoming a host, payments, cancellations, or general platform questions.",
 };
 
 export const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: '1',
-      text: 'Hello! I\'m your RentHub assistant. How can I help you today?',
-      sender: 'bot',
-      timestamp: new Date()
-    }
+      id: "1",
+      text: "Hello! I'm your RentHub assistant. How can I help you today?",
+      sender: "bot",
+      timestamp: new Date(),
+    },
   ]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const getBotResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
-    
+
     for (const [key, response] of Object.entries(predefinedResponses)) {
-      if (key !== 'default' && lowerMessage.includes(key)) {
+      if (key !== "default" && lowerMessage.includes(key)) {
         return response;
       }
     }
-    
+
     return predefinedResponses.default;
   };
 
@@ -54,28 +58,28 @@ export const Chatbot = () => {
     const userMessage: Message = {
       id: Date.now().toString(),
       text: inputValue,
-      sender: 'user',
-      timestamp: new Date()
+      sender: "user",
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
 
     // Simulate bot response delay
     setTimeout(() => {
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         text: getBotResponse(inputValue),
-        sender: 'bot',
-        timestamp: new Date()
+        sender: "bot",
+        timestamp: new Date(),
       };
-      setMessages(prev => [...prev, botResponse]);
+      setMessages((prev) => [...prev, botResponse]);
     }, 1000);
 
-    setInputValue('');
+    setInputValue("");
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSendMessage();
     }
   };
@@ -93,14 +97,14 @@ export const Chatbot = () => {
   }
 
   return (
-    <Card className="fixed bottom-4 right-4 w-80 h-96 shadow-xl z-50">
+    <Card className="fixed bottom-14 right-4 w-80 h-96 shadow-xl z-50">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium flex items-center gap-2">
           <Bot className="h-4 w-4" />
           RentHub Assistant
         </CardTitle>
         <Button
-          variant="ghost"
+          variant="secondary"
           size="sm"
           onClick={() => setIsOpen(false)}
           className="h-6 w-6 p-0"
@@ -114,18 +118,24 @@ export const Chatbot = () => {
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${
+                  message.sender === "user" ? "justify-end" : "justify-start"
+                }`}
               >
                 <div
                   className={`max-w-[80%] rounded-lg p-3 ${
-                    message.sender === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted'
+                    message.sender === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted"
                   }`}
                 >
                   <div className="flex items-start gap-2">
-                    {message.sender === 'bot' && <Bot className="h-4 w-4 mt-0.5 flex-shrink-0" />}
-                    {message.sender === 'user' && <User className="h-4 w-4 mt-0.5 flex-shrink-0" />}
+                    {message.sender === "bot" && (
+                      <Bot className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    )}
+                    {message.sender === "user" && (
+                      <User className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    )}
                     <p className="text-sm">{message.text}</p>
                   </div>
                 </div>
@@ -133,8 +143,8 @@ export const Chatbot = () => {
             ))}
           </div>
         </ScrollArea>
-        <div className="p-4 border-t">
-          <div className="flex gap-2">
+        <div className="p-4 border-t bg-white">
+          <div className="flex gap-2 ">
             <Input
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}

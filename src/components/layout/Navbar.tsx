@@ -185,7 +185,7 @@ export const Navbar = ({
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="secondary" size="sm">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
@@ -256,13 +256,13 @@ export const Navbar = ({
           <div className="flex items-center space-x-2 ml-auto">
             <RoleSwitcher />
 
-            <Button variant="ghost" size="sm" onClick={handleSearchClick}>
+            <Button variant="secondary" size="sm" onClick={handleSearchClick}>
               <Search className="h-4 w-4" />
             </Button>
 
             {isAuthenticated && (
               <Link to="/notifications">
-                <Button variant="ghost" size="sm" className="relative">
+                <Button variant="secondary" size="sm" className="relative">
                   <Bell className="h-4 w-4" />
                   <Badge
                     variant="destructive"
@@ -276,7 +276,7 @@ export const Navbar = ({
 
             {isAuthenticated && user?.role === "renter" && (
               <Link to="/favorites">
-                <Button variant="ghost" size="sm" className="relative">
+                <Button variant="secondary" size="sm" className="relative">
                   <Heart className="h-4 w-4" />
                   {/* You can add a badge here for favorite count */}
                 </Button>
@@ -287,7 +287,7 @@ export const Navbar = ({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
-                    variant="ghost"
+                    variant="secondary"
                     className="flex items-center space-x-2"
                   >
                     <img
@@ -321,7 +321,11 @@ export const Navbar = ({
             ) : (
               <Dialog open={isAccountOpen} onOpenChange={setIsAccountOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="ghost" size="sm" className="hidden sm:flex">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="hidden sm:flex"
+                  >
                     <User className="h-4 w-4 mr-2" />
                     Account
                   </Button>
@@ -332,7 +336,7 @@ export const Navbar = ({
 
             {isAuthenticated && (
               <Link to="/my-rentals">
-                <Button variant="ghost" size="sm" className="relative">
+                <Button variant="secondary" size="sm" className="relative">
                   <Calendar className="h-4 w-4" />
                   {rentals.length > 0 && (
                     <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">

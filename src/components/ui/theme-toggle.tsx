@@ -1,7 +1,7 @@
-import { Moon, Sun } from 'lucide-react';
-import { Button } from './button';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { toggleTheme } from '../../store/slices/themeSlice';
+import { Moon, Sun } from "lucide-react";
+import { Button } from "./button";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { toggleTheme } from "../../store/slices/themeSlice";
 
 export const ThemeToggle = () => {
   const { isDarkMode } = useAppSelector((state) => state.theme);
@@ -9,16 +9,12 @@ export const ThemeToggle = () => {
 
   return (
     <Button
-      variant="ghost"
+      variant="secondary"
       size="sm"
       onClick={() => dispatch(toggleTheme())}
       className="h-9 w-9 p-0"
     >
-      {isDarkMode ? (
-        <Sun className="h-4 w-4" />
-      ) : (
-        <Moon className="h-4 w-4" />
-      )}
+      {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
