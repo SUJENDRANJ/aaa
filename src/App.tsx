@@ -1,40 +1,40 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './components/providers/ThemeProvider';
-import { Navbar } from './components/layout/Navbar';
-import { HostNavbar } from './components/layout/HostNavbar';
-import { AdminNavbar } from './components/layout/AdminNavbar';
-import { Footer } from './components/layout/Footer';
-import { Chatbot } from './components/ui/chatbot';
-import { Home } from './pages/Home';
-import { Products } from './pages/Products';
-import { ProductDetail } from './pages/ProductDetail';
-import { Favorites } from './pages/Favorites';
-import { Notifications } from './pages/Notifications';
-import { Profile } from './pages/Profile';
-import { HostProfile } from './pages/HostProfile';
-import { HostDashboard } from './pages/HostDashboard';
-import { HostKYC } from './pages/HostKYC';
-import { CreateProduct } from './pages/CreateProduct';
-import { CompleteProfile } from './pages/CompleteProfile';
-import { HostAnalytics } from './pages/HostAnalytics';
-import { MyRentals } from './pages/MyRentals';
-import { Payment } from './pages/Payment';
-import { AdminLogin } from './pages/AdminLogin';
-import { AdminDashboard } from './pages/AdminDashboard';
-import { Toaster } from '@/components/ui/toaster';
-import { useAppSelector } from './hooks';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./components/providers/ThemeProvider";
+import { Navbar } from "./components/layout/Navbar";
+import { HostNavbar } from "./components/layout/HostNavbar";
+import { AdminNavbar } from "./components/layout/AdminNavbar";
+import { Footer } from "./components/layout/Footer";
+import { Chatbot } from "./components/ui/chatbot";
+import { Home } from "./pages/Home";
+import { Products } from "./pages/Products";
+import { ProductDetail } from "./pages/ProductDetail";
+import { Favorites } from "./pages/Favorites";
+import { Notifications } from "./pages/Notifications";
+import { Profile } from "./pages/Profile";
+import { HostProfile } from "./pages/HostProfile";
+import { HostDashboard } from "./pages/HostDashboard";
+import { HostKYC } from "./pages/HostKYC";
+import { CreateProduct } from "./pages/CreateProduct";
+import { CompleteProfile } from "./pages/CompleteProfile";
+import { HostAnalytics } from "./pages/HostAnalytics";
+import { MyRentals } from "./pages/MyRentals";
+import { Payment } from "./pages/Payment";
+import { AdminLogin } from "./pages/AdminLogin";
+import { AdminDashboard } from "./pages/AdminDashboard";
+import { Toaster } from "@/components/ui/toaster";
+import { useAppSelector } from "./hooks";
 
 function App() {
   const { user } = useAppSelector((state) => state.auth);
-  const isHost = user?.role === 'host';
-  const isAdmin = user?.email === 'admin@renthub.com';
+  const isHost = user?.role === "host";
+  const isAdmin = user?.email === "admin@renthub.com";
 
   return (
     <ThemeProvider>
       <Router>
         <div className="min-h-screen bg-background">
           {isAdmin ? <AdminNavbar /> : isHost ? <HostNavbar /> : <Navbar />}
-          
+
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -46,13 +46,19 @@ function App() {
               <Route path="/payment" element={<Payment />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/host/profile" element={<HostProfile />} />
-              <Route path="/host/complete-profile" element={<CompleteProfile />} />
+              <Route
+                path="/host/complete-profile"
+                element={<CompleteProfile />}
+              />
               <Route path="/host/dashboard" element={<HostDashboard />} />
               <Route path="/host/analytics" element={<HostAnalytics />} />
               <Route path="/host/kyc" element={<HostKYC />} />
               <Route path="/host/create-product" element={<CreateProduct />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+              {/* Catch-all route for 404 */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
 
@@ -66,3 +72,19 @@ function App() {
 }
 
 export default App;
+
+// NotFound Page
+const NotFound = () => (
+  <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
+    <h1 className="text-6xl font-bold mb-4">404</h1>
+    <p className="text-xl text-muted-foreground mb-4">
+      Oops! The page you are looking for does not exist.
+    </p>
+    <a
+      href="/"
+      className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition"
+    >
+      Go Home
+    </a>
+  </div>
+);
